@@ -11,5 +11,6 @@ pip install opencv-python
 pip install numpy
 pip install pillow
 pip install imutils
+pip install dlib
 ```
 3. Done
