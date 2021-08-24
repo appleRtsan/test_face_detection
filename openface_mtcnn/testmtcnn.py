@@ -32,21 +32,24 @@ def get_data_from_webcam(image):
     right_eye_img = []
     for face in faces:
         x, y, w, h = face['box']
-        roi_face = image[y:y + h, x:x + w]
-        cv2.imshow('face',roi_face)
-        cv2.waitKey(0)
+        #roi_face = image[y:y + h, x:x + w]
+        # cv2.imshow('face',roi_face)
+        # cv2.waitKey(0)
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2) #draw face
-        # got_left = False
-        # got_right = False
-        # for (name, (i, j)) in face_utils.FACIAL_LANDMARKS_IDXS.items(): #detecting eyes in range of face
-        #     if (got_right and got_left):
-        #         break
-        #     if(name == 'right_eye'):
-        #         right_eye_img = get_eye(shape, i, j, image)
-        #         got_right = True
-        #     elif(name == 'left_eye'):
-        #         left_eye_img = get_eye(shape, i, j, image)
-        #         got_left = True
+        for key, value in face['keypoints'].items():
+            
+            if key == 'left_eye':
+                left_eye_img = image[value[1]-25:value[1]+25, value[0]-25:value[0]+25]
+                # cv2.imshow('leye',left_eye_img)
+                cv2.rectangle(image,(value[0]-25, value[1]-25), (value[0]+25, value[1]+25), (0, 255, 0), 2)
+            elif key == 'right_eye':
+                right_eye_img = image[value[1]-25:value[1]+25, value[0]-25:value[0]+25]
+                #cv2.imshow('reye',right_eye_img)
+                cv2.rectangle(image,(value[0]-25, value[1]-25), (value[0]+25, value[1]+25), (0, 255, 0), 2)
+                break
+        
+        if left_eye_img == None or right_eye_img == None:
+            return None
 
 
 
