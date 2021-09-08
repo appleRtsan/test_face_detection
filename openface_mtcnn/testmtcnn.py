@@ -31,11 +31,13 @@ def get_data_from_webcam(image,detector):
                 left_eye_img = image[value[1]-25:value[1]+25, value[0]-25:value[0]+25]
                 # cv2.imshow('leye',left_eye_img)
                 cv2.rectangle(image,(value[0]-25, value[1]-25), (value[0]+25, value[1]+25), (0, 255, 0), 2)
+                cv2.circle(image,(value[0], value[1]), 5, (255, 255, 0), -1)
                 got_left = True
             elif key == 'right_eye':
                 right_eye_img = image[value[1]-25:value[1]+25, value[0]-25:value[0]+25]
                 #cv2.imshow('reye',right_eye_img)
                 cv2.rectangle(image,(value[0]-25, value[1]-25), (value[0]+25, value[1]+25), (0, 255, 0), 2)
+                cv2.circle(image,(value[0], value[1]), 5, (255, 255, 0), -1)
                 got_right = True
                 break
         
@@ -46,7 +48,7 @@ def get_data_from_webcam(image,detector):
 
 
 def main():
-    video_capture = cv2.VideoCapture('C:/Users/User/Documents/GitHub/eye_track_stimulate_process/saved_videos/output_1_pos(x,y)=(-15.19,-26.43).avi')
+    video_capture = cv2.VideoCapture(0)
     detector = mtcnn.MTCNN()
     while (True):
         _, frame = video_capture.read()

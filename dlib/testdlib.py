@@ -1,6 +1,4 @@
-import os
 import numpy as np
-from PIL import Image
 from imutils import face_utils
 import imutils
 import dlib
@@ -62,7 +60,8 @@ def main():
         get_data_from_webcam(frame)
         frame = cv2.resize(frame, (one_size, one_size))
         cv2.imshow("gaze point", frame)
-        cv2.waitKey(1)
+        if cv2.waitKey(1) == 32:
+            break
 
 
 main()
