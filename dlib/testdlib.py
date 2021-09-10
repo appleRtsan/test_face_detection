@@ -47,7 +47,7 @@ def get_data_from_webcam(image):
     w = rects[0].right() - x
     h = rects[0].bottom() - y
     roi_face = image[y:y + h, x:x + w]
-    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2) #draw face
+    cv2.rectangle(image, (x, y), (x + w, y + h), (255, 255, 0), 2) #draw face
 
 
 
